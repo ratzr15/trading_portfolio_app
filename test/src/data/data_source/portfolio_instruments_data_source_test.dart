@@ -112,6 +112,104 @@ void main() {
       throwsA(isA<ArgumentError>()),
     );
   });
+
+  group('Exception', () {
+    const String userIdentifier = 'userIdentifier';
+
+    test('Failure: throws Exception when API response data is null', () async {
+      // Given
+      when(
+        () => apiClientMock.get(
+          any(),
+          options: any(named: 'options'),
+          baseUrl: any(named: 'baseUrl'),
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: null,
+          statusCode: 200,
+          requestOptions: RequestOptions(path: 'c/$userIdentifier'),
+        ),
+      );
+
+      // When & Then
+      await expectLater(
+        () => sut(userIdentifier: userIdentifier),
+        throwsA(isA<Exception>().having((e) => e.toString(), 'message',
+            'Exception: No response from c/$userIdentifier')),
+      );
+
+      verify(() => apiClientMock.get(
+            'c/$userIdentifier',
+            options: any(named: 'options'),
+            baseUrl: baseUrlDummy,
+          )).called(1);
+    });
+
+    test(
+        'Failure: throws Exception when API response data is not a Map<String, dynamic>',
+        () async {
+      // Given
+      when(
+        () => apiClientMock.get(
+          any(),
+          options: any(named: 'options'),
+          baseUrl: any(named: 'baseUrl'),
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: [1, 2, 3],
+          statusCode: 200,
+          requestOptions: RequestOptions(path: 'c/$userIdentifier'),
+        ),
+      );
+
+      // When & Then
+      await expectLater(
+        () => sut(userIdentifier: userIdentifier),
+        throwsA(isA<Exception>().having((e) => e.toString(), 'message',
+            'Exception: Response is not in proper format, Expected in Map<String, dynamic>')),
+      );
+
+      verify(() => apiClientMock.get(
+            'c/$userIdentifier',
+            options: any(named: 'options'),
+            baseUrl: baseUrlDummy,
+          )).called(1);
+    });
+
+    test('Failure: throws Exception when API response status code is not 200',
+        () async {
+      // Given
+      const int statusCode = 404;
+      when(
+        () => apiClientMock.get(
+          any(),
+          options: any(named: 'options'),
+          baseUrl: any(named: 'baseUrl'),
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: null,
+          statusCode: statusCode,
+          requestOptions: RequestOptions(path: 'c/$userIdentifier'),
+        ),
+      );
+
+      // When & Then
+      await expectLater(
+        () => sut(userIdentifier: userIdentifier),
+        throwsA(isA<Exception>().having((e) => e.toString(), 'message',
+            'Exception: Error while fetching data from c/$userIdentifier, status code: $statusCode')),
+      );
+
+      verify(() => apiClientMock.get(
+            'c/$userIdentifier',
+            options: any(named: 'options'),
+            baseUrl: baseUrlDummy,
+          )).called(1);
+    });
+  });
 }
 
 class ApiClientMock extends Mock implements ApiClient {}
