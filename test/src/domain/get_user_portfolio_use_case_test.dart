@@ -23,14 +23,12 @@ void main() {
   group('GetUserPortfolioUseCase', () {
     const tUserIdentifier = 'user123';
 
-    // Define mock data for BalanceModel
     final tBalanceModel = BalanceModel(
       netValue: 1000.0,
       profitLossAmount: 50.0,
       profitLossPercentage: 5.0,
     );
 
-    // Define mock data for InstrumentModel
     final tInstrumentModelAAPL = InstrumentModel(
       ticker: 'AAPL',
       name: 'Apple Inc.',
