@@ -1,5 +1,5 @@
 abstract class PortfolioInstrumentsDataSource {
-
-  Future<List<dynamic>> call();
-
+  Future<Map<String, dynamic>> call({
+    required String userIdentifier,
+  });
 }

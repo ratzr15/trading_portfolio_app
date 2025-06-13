@@ -2,20 +2,30 @@ name: trading_portfolio_app
 description: "A flutter app to show user's portfolio instruments and live simulates live price per instrument"
 version: 1.0.0+1
 
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
 environment:
   sdk: ^3.5.4
-
 
 dependencies:
   flutter:
     sdk: flutter
-
+  dio: 5.2.0+1
   cupertino_icons: ^1.0.8
+
+  api_client:
+    path: packages/core/api_client
+  utils:
+    path: packages/core/utils
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  integration_test:
+    sdk: flutter
+  mocktail: ^0.2.0
+  bloc_test: ^8.1.0
 
 flutter:
   uses-material-design: true
