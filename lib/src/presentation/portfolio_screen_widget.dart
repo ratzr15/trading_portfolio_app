@@ -1,35 +1,45 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trading_portfolio_app/src/presentation/bloc/portfolio_screen_bloc.dart';
+import 'package:trading_portfolio_app/src/presentation/bloc/portfolio_screen_event.dart';
+import 'package:trading_portfolio_app/src/presentation/bloc/portfolio_screen_state.dart';
+import 'package:trading_portfolio_app/src/presentation/models/portfolio_instrument_display_model.dart';
 import 'package:utils/utils.dart';
 
 class PortfolioScreenWidget extends StatefulWidget {
-  const PortfolioScreenWidget({super.key});
+  final String userName;
+
+  const PortfolioScreenWidget({
+    super.key,
+    required this.userName,
+  });
 
   @override
   State<PortfolioScreenWidget> createState() => _TradeListScreenWidgetState();
 }
 
 class _TradeListScreenWidgetState extends State<PortfolioScreenWidget> {
-  late TradeListScreenBloc _bloc;
+  late PortfolioScreenBloc _bloc;
 
   @override
   void initState() {
     super.initState();
 
-    _bloc = context.read<TradeListScreenBloc>();
+    _bloc = context.read<PortfolioScreenBloc>();
   }
 
-  void _dispatch(TradeListScreenEvent event) => _bloc.add(event);
+  void _dispatch(PortfolioScreenInitialEvent event) => _bloc.add(event);
 
   @override
   Widget build(BuildContext context) {
-    _dispatch(const TradeListScreenInitialEvent());
+    _dispatch(const PortfolioScreenInitialEvent());
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forex'),
+      appBar: CustomAppBar(
+        userName: widget.userName,
       ),
-      body: BlocConsumer<TradeListScreenBloc, TradeListScreenState>(
+      body: BlocConsumer<PortfolioScreenBloc, PortfolioScreenState>(
         bloc: _bloc,
         buildWhen: alwaysTrue,
         listenWhen: alwaysFalse,
@@ -47,22 +57,22 @@ class _TradeListScreenWidgetState extends State<PortfolioScreenWidget> {
 
 Widget _onStateChangeBuilder(
   BuildContext context,
-  TradeListScreenState state,
+  PortfolioScreenState state,
 ) {
   return _buildState(context, state);
 }
 
-Widget _buildState(BuildContext context, TradeListScreenState state) {
-  if (state is TradeListScreenLoadingState) {
+Widget _buildState(BuildContext context, PortfolioScreenState state) {
+  if (state is PortfolioScreenLoadingState) {
     return const _TradeListLoadingWidget(
       key: TradeListKeys.loading,
     );
-  } else if (state is TradeListScreenLoadedState) {
+  } else if (state is PortfolioScreenLoadedState) {
     return _TradeListLoadedWidget(
       key: TradeListKeys.loaded,
-      tradeDisplayItems: state.displayModels,
+      portfolioDisplayItems: state.displayModels,
     );
-  } else if (state is TradeListScreenErrorState) {
+  } else if (state is PortfolioScreenErrorState) {
     return _TradeListErrorWidget(
       key: TradeListKeys.error,
       title: state.title,
@@ -107,19 +117,19 @@ class _TradeListLoadingWidget extends StatelessWidget {
 }
 
 class _TradeListLoadedWidget extends StatelessWidget {
-  final List<TradeItemDisplayModel> tradeDisplayItems;
+  final List<PortfolioInstrumentDisplayModel> portfolioDisplayItems;
 
   const _TradeListLoadedWidget({
     required super.key,
-    required this.tradeDisplayItems,
+    required this.portfolioDisplayItems,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: tradeDisplayItems.length,
+      itemCount: portfolioDisplayItems.length,
       itemBuilder: (context, index) {
-        final item = tradeDisplayItems[index];
+        final item = portfolioDisplayItems[index];
 
         return Padding(
           padding: const EdgeInsets.all(Dimens.small),
@@ -132,11 +142,6 @@ class _TradeListLoadedWidget extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(
                   Dimens.small,
-                ),
-                child: SizedBox(
-                  child: PriceWidget(
-                    symbol: item.symbol,
-                  ),
                 ),
               ),
               Expanded(
@@ -171,7 +176,7 @@ class _TradeListLoadedWidget extends StatelessWidget {
 
 abstract class _Constants {
   static const errorTitle = 'Sorry, unexpected error';
-  static const loadingTitle = 'Fetching trade...';
+  static const loadingTitle = 'Fetching your portfolio... 💲💲💲';
 }
 
 abstract class TradeListKeys {
