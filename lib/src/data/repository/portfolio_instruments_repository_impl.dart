@@ -9,9 +9,10 @@ class PortFolioInstrumentsRepositoryImpl
   final PortfolioInstrumentsRemoteToDomainMapper
       portfolioInstrumentsRemoteToDomainMapper;
 
-  PortFolioInstrumentsRepositoryImpl(
-      {required this.portfolioInstrumentsDataSource,
-      required this.portfolioInstrumentsRemoteToDomainMapper});
+  PortFolioInstrumentsRepositoryImpl({
+    required this.portfolioInstrumentsDataSource,
+    required this.portfolioInstrumentsRemoteToDomainMapper,
+  });
 
   @override
   Future<PortfolioModel> call({required String userIdentifier}) async {
