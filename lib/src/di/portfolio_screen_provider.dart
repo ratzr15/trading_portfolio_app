@@ -45,7 +45,9 @@ Widget _registerBloc(BuildContext context) {
     providers: [
       Provider(create: (_) => _initListBloc(context)),
     ],
-    child: const PortfolioScreenWidget(),
+    child: const PortfolioScreenWidget(
+      userName: _Constants.userName,
+    ),
   );
 }
 
@@ -94,4 +96,5 @@ PortfolioScreenBloc _initListBloc(BuildContext context) {
 abstract class _Constants {
   static const fiveSeconds = Duration(seconds: 5);
   static const baseUrl = 'https://dummyjson.com';
+  static const userName = 'John Doe';
 }

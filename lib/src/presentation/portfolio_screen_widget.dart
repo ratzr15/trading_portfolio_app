@@ -8,7 +8,12 @@ import 'package:trading_portfolio_app/src/presentation/models/portfolio_instrume
 import 'package:utils/utils.dart';
 
 class PortfolioScreenWidget extends StatefulWidget {
-  const PortfolioScreenWidget({super.key});
+  final String userName;
+
+  const PortfolioScreenWidget({
+    super.key,
+    required this.userName,
+  });
 
   @override
   State<PortfolioScreenWidget> createState() => _TradeListScreenWidgetState();
@@ -31,8 +36,8 @@ class _TradeListScreenWidgetState extends State<PortfolioScreenWidget> {
     _dispatch(const PortfolioScreenInitialEvent());
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forex'),
+      appBar: CustomAppBar(
+        userName: widget.userName,
       ),
       body: BlocConsumer<PortfolioScreenBloc, PortfolioScreenState>(
         bloc: _bloc,
@@ -171,7 +176,7 @@ class _TradeListLoadedWidget extends StatelessWidget {
 
 abstract class _Constants {
   static const errorTitle = 'Sorry, unexpected error';
-  static const loadingTitle = 'Fetching trade...';
+  static const loadingTitle = 'Fetching your portfolio... 💲💲💲';
 }
 
 abstract class TradeListKeys {

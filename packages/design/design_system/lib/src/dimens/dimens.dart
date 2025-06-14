@@ -9,6 +9,12 @@ class Dimens {
   static const double boxHeight = 20;
 }
 
+class FontSize {
+  static const double heading = 20;
+  static const double subHeading = 16;
+  static const double content = 14;
+}
+
 class DesignColor {
   static const Color background = Color(0xFFFFEDB2);
 }
