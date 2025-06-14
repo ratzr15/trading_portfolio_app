@@ -23,8 +23,3 @@ class GetUserPortfolioUseCaseImpl implements GetUserPortfolioUseCase {
     }
   }
 }
-
-//TODO: Move to bloc
-abstract class _Constants {
-  static const userIdentifier = '60b7-70a6-4ee3-bae8';
-}
