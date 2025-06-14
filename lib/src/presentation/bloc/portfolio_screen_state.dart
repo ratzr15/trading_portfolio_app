@@ -5,24 +5,24 @@ abstract class PortfolioScreenState extends Equatable {
   const PortfolioScreenState();
 }
 
-class TradeListScreenLoadingState extends PortfolioScreenState {
+class PortfolioScreenLoadingState extends PortfolioScreenState {
   @override
   List<Object?> get props => [];
 }
 
-class TradeListScreenLoadedState extends PortfolioScreenState {
+class PortfolioScreenLoadedState extends PortfolioScreenState {
   final List<PortfolioInstrumentDisplayModel> displayModels;
 
-  const TradeListScreenLoadedState(this.displayModels);
+  const PortfolioScreenLoadedState(this.displayModels);
 
   @override
   List<Object?> get props => [displayModels];
 }
 
-class TradeListScreenErrorState extends PortfolioScreenState {
+class PortfolioScreenErrorState extends PortfolioScreenState {
   final String title;
 
-  const TradeListScreenErrorState({required this.title});
+  const PortfolioScreenErrorState({required this.title});
 
   @override
   List<Object?> get props => [title];

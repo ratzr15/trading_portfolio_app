@@ -63,16 +63,16 @@ Widget _onStateChangeBuilder(
 }
 
 Widget _buildState(BuildContext context, PortfolioScreenState state) {
-  if (state is TradeListScreenLoadingState) {
+  if (state is PortfolioScreenLoadingState) {
     return const _TradeListLoadingWidget(
       key: TradeListKeys.loading,
     );
-  } else if (state is TradeListScreenLoadedState) {
+  } else if (state is PortfolioScreenLoadedState) {
     return _TradeListLoadedWidget(
       key: TradeListKeys.loaded,
       portfolioDisplayItems: state.displayModels,
     );
-  } else if (state is TradeListScreenErrorState) {
+  } else if (state is PortfolioScreenErrorState) {
     return _TradeListErrorWidget(
       key: TradeListKeys.error,
       title: state.title,

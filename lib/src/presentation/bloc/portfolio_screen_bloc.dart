@@ -12,7 +12,7 @@ class PortfolioScreenBloc
   PortfolioScreenBloc({
     required this.getUserPortfolioUseCase,
     required this.portfolioScreenDisplayMapper,
-  }) : super(TradeListScreenLoadingState()) {
+  }) : super(PortfolioScreenLoadingState()) {
     on<PortfolioScreenInitialEvent>(_onListScreenInitialEvent);
   }
 
@@ -21,21 +21,21 @@ class PortfolioScreenBloc
     Emitter<PortfolioScreenState> emit,
   ) async {
     try {
-      emit(TradeListScreenLoadingState());
+      emit(PortfolioScreenLoadingState());
       final response = await getUserPortfolioUseCase(
         userIdentifier: _Constants.userIdentifier,
       );
 
       if (response.positions.isEmpty) {
-        emit(const TradeListScreenErrorState(
+        emit(const PortfolioScreenErrorState(
             title: 'Sorry, user information not found'));
       } else {
         final displayItems =
             portfolioScreenDisplayMapper(domainModel: response);
-        emit(TradeListScreenLoadedState(displayItems));
+        emit(PortfolioScreenLoadedState(displayItems));
       }
     } catch (e) {
-      emit(const TradeListScreenErrorState(
+      emit(const PortfolioScreenErrorState(
           title: 'Sorry, trade information could not be fetched'));
     }
   }
