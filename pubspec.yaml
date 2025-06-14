@@ -12,11 +12,15 @@ dependencies:
     sdk: flutter
   dio: 5.2.0+1
   cupertino_icons: ^1.0.8
+  equatable: ^2.0.3
+  flutter_bloc: ^7.3.3
 
   api_client:
     path: packages/core/api_client
   utils:
     path: packages/core/utils
+  design_system:
+    path: packages/design/design_system
 
 dev_dependencies:
   flutter_test:
