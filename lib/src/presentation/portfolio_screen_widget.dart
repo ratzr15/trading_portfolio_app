@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trading_portfolio_app/src/presentation/bloc/portfolio_screen_bloc.dart';
 import 'package:trading_portfolio_app/src/presentation/bloc/portfolio_screen_event.dart';
 import 'package:trading_portfolio_app/src/presentation/bloc/portfolio_screen_state.dart';
+import 'package:trading_portfolio_app/src/presentation/components/price/price_widget.dart';
 import 'package:trading_portfolio_app/src/presentation/models/portfolio_instrument_display_model.dart';
 import 'package:utils/utils.dart';
 
@@ -142,6 +143,11 @@ class _TradeListLoadedWidget extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(
                   Dimens.small,
+                ),
+                child: SizedBox(
+                  child: PriceWidget(
+                    symbol: item.symbol,
+                  ),
                 ),
               ),
               Expanded(

@@ -1,5 +1,5 @@
 name: trading_portfolio_app
-description: "A flutter app to show user's portfolio instruments and live simulates live price per instrument"
+description: "A flutter app to show user's portfolio instruments and simulates live price per instrument"
 version: 1.0.0+1
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -15,6 +15,7 @@ dependencies:
   equatable: ^2.0.3
   flutter_bloc: ^7.3.3
   provider: ^6.1.1
+  intl: 0.19.0
 
   api_client:
     path: packages/core/api_client
