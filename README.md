@@ -50,7 +50,7 @@ price from a simulation.
 				
 --packages
    |--core
-   		|--api_client    
+	|--api_client    
    |--desisgn
         |--design_system
 ```
