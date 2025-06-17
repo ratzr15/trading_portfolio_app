@@ -15,6 +15,7 @@ void main() {
       routes: {
         initialRoute: (context) => const PortfolioScreenProvider(),
       },
+      debugShowCheckedModeBanner: false,
     ),
   );
 }

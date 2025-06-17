@@ -7,6 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.trading_portfolio_app"
+    compileSdkVersion 35
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -37,6 +38,12 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+}
+
+ext {
+    compileSdkVersion = 35
+    targetSdkVersion = 35
+    appCompatVersion = "1.7.0"
 }
 
 flutter {
