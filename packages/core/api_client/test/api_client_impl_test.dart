@@ -46,7 +46,7 @@ void main() {
           requestOptions: RequestOptions(path: 'url'),
         );
 
-        final failure = DioError(
+        final failure = DioException(
           requestOptions: RequestOptions(path: 'url'),
           response: failureResponse,
         );

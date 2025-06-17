@@ -1,6 +1,17 @@
-include: ../../../../analysis_options.yaml
-
 linter:
   rules:
-    sort_pub_dependencies: false
+    avoid_print: true
+    prefer_single_quotes: true
 
+analyzer:
+  language:
+    # Ensures type safety by adding strict checks: https://dart.dev/language/type-system
+    strict-casts: false
+    strict-inference: false
+    strict-raw-types: false
+  errors:
+    always_require_non_null_named_parameters: error
+    annotate_overrides: error
+    avoid_catching_errors: error
+    avoid_empty_else: error
+    always_use_package_imports: false

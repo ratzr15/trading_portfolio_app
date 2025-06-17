@@ -29,7 +29,7 @@ price from a simulation.
 
 ### Code quality
 
-- **97.2% coverage**
+- 97.2% coverage
     - Unit tests -> 80%
     - Widget tests -> 10%
     - Golden tests -> 5%
@@ -50,7 +50,6 @@ price from a simulation.
 				
 --packages
    |--core
-	|--api_client    
    |--desisgn
         |--design_system
 ```
